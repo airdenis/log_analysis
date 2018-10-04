@@ -31,7 +31,8 @@ for n in result:
 db = psycopg2.connect("dbname=news")
 print('Connected to the database test table')
 c = db.cursor()
-c.execute('''select time::timestamp::date, round(((count(time::timestamp::date))*100)::numeric
+c.execute('''select time::timestamp::date, 
+        round((count(time::timestamp::date)*100)::numeric
         / (select count(*) from log 
         where status != '200 OK'), 2)
         from log where status != '200 OK' 
