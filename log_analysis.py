@@ -1,14 +1,49 @@
 import psycopg2
 
 
+#db = psycopg2.connect("dbname=news")
+#print('Connected to the database test table')
+#c = db.cursor()
+#c.execute('''CREATE view v_articles_authors_log as
+#                SELECT articles.title AS articles,
+#                        authors.name AS authors
+#                FROM articles, authors, log
+#                WHERE articles.slug=substring(log.path,10) and
+#                      articles.author=authors.id;''')
+#db.commit()
+#db.close()
+
+
+#db = psycopg2.connect("dbname=news")
+#print('Connected to the database test table')
+#c = db.cursor()
+#c.execute('''drop view v_articles_authors_log;''')
+#db.commit()
+#db.close()
+
+
+#db = psycopg2.connect("dbname=news")
+#print('Connected to the database test table')
+#c = db.cursor()
+#c.execute('''CREATE view v_errors AS
+#                SELECT time::timestamp::date AS date
+#                FROM log
+#                WHERE status != '200 OK';''')
+#db.commit()
+#db.close()
+#print('View "v_errors" was created')
+
+
+
+
 db = psycopg2.connect("dbname=news")
 print('Connected to the database test table')
 c = db.cursor()
-c.execute('''select articles.title, count(*) as num from articles, log 
-            where articles.slug=substring(log.path,10)
-            group by articles.title
-            order by num desc
-            limit 3;''')
+c.execute('''SELECT articles, count(*) AS num
+                FROM v_articles_authors_log
+                GROUP BY articles
+                ORDER BY num DESC
+                LIMIT 3;''')
 result = c.fetchall()
 db.close()
 for n in result:
@@ -17,12 +52,12 @@ for n in result:
 
 db = psycopg2.connect("dbname=news")
 print('Connected to the database test table')
-c1 = db.cursor()
-c1.execute('''select authors.name, count(*) as num from articles, log, authors 
-            where articles.slug=substring(log.path,10) and articles.author=authors.id
-            group by authors.name
-            order by num desc;''')
-result = c1.fetchall()
+c = db.cursor()
+c.execute('''SELECT authors, count(*) AS num
+                FROM v_articles_authors_log
+                GROUP BY authors
+                ORDER BY num DESC;''')
+result = c.fetchall()
 db.close()
 for n in result:
     print(n)
@@ -31,15 +66,17 @@ for n in result:
 db = psycopg2.connect("dbname=news")
 print('Connected to the database test table')
 c = db.cursor()
-c.execute('''select time::timestamp::date, 
-        round((count(time::timestamp::date)*100)::numeric
-        / (select count(*) from log 
-        where status != '200 OK'), 2)
-        from log where status != '200 OK' 
-        group by time::timestamp::date
-        order by count(time::timestamp::date) desc
-        limit 1;''')
-result = c.fetchall()[0]
+c.execute('''SELECT date, 
+                    ROUND(COUNT(*) * 100::numeric/
+                    (SELECT COUNT(*) FROM v_errors), 2) AS num
+                FROM v_errors
+                GROUP BY date
+                ORDER BY num DESC
+                LIMIT 1;''')
+result = c.fetchall()
 db.close()
-print(result)
+for n in result:
+    print(n)
+
+
 
