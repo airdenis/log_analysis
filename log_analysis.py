@@ -1,41 +1,6 @@
 import psycopg2
 
 
-#db = psycopg2.connect("dbname=news")
-#print('Connected to the database test table')
-#c = db.cursor()
-#c.execute('''CREATE view v_articles_authors_log as
-#                SELECT articles.title AS articles,
-#                        authors.name AS authors
-#                FROM articles, authors, log
-#                WHERE articles.slug=substring(log.path,10) and
-#                      articles.author=authors.id;''')
-#db.commit()
-#db.close()
-
-
-#db = psycopg2.connect("dbname=news")
-#print('Connected to the database test table')
-#c = db.cursor()
-#c.execute('''drop view v_articles_authors_log;''')
-#db.commit()
-#db.close()
-
-
-#db = psycopg2.connect("dbname=news")
-#print('Connected to the database test table')
-#c = db.cursor()
-#c.execute('''CREATE view v_errors AS
-#                SELECT time::timestamp::date AS date
-#                FROM log
-#                WHERE status != '200 OK';''')
-#db.commit()
-#db.close()
-#print('View "v_errors" was created')
-
-
-
-
 db = psycopg2.connect("dbname=news")
 print('Connected to the database test table')
 c = db.cursor()
