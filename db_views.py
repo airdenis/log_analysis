@@ -13,9 +13,13 @@ def create_articles_authors_log_view():
                               articles.author = authors.id;''')
         db.commit()
         db.close()
-        print("View 'v_articles_authors_log' has been created.")
+        print('\033[92m\033[1m' + 
+                "'v_articles_authors_log' view successfully has been created." +
+                '\033[0m')
     except:
-        print("Failed to create 'v_articles_authors_log' view.")
+        print('\033[91m\033[1m' +
+                "Failed to create 'v_articles_authors_log' view." +
+                '\033[0m')
     finally:
         return
 
@@ -30,9 +34,14 @@ def create_errors_view():
                         WHERE status != '200 OK';''')
         db.commit()
         db.close()
-        print("View 'v_errors' has been created.")
+        print('\033[92m\033[1m' +
+                "'v_errors' view successfully has been created." +
+                '\033[0m')
+
     except:
-        print("Faild to create 'v_errors' view.")
+        print('\033[91m\033[1m' +
+                "Failed to create 'v_errors' view." +
+                '\033[0m')
     finally:
         return
 
