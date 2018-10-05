@@ -39,7 +39,7 @@ def most_popular_article_author():
             '\033[0m')
 
     for item in result:
-        print(u"\u2022 \"{}\" \u2014 {} views".format(*item))
+        print(u"\u2022 {} \u2014 {} views".format(*item))
 
     print("\n")
     return
@@ -69,7 +69,7 @@ def days_error():
         date_format = item[0].strftime("%d %B, %Y")
 
         print(u"\u2022 {} \u2014 {}% errors".format(date_format, item[1]),)
-    print("Requests have been processed.")
+    print("\033[92mRequests have been processed.\033[0m")
     return
 
 
