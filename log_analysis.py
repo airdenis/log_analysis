@@ -2,6 +2,12 @@ from time import strftime
 import psycopg2
 
 
+db = psycopg2.connect("dbname=news")
+c = db.cursor()
+c.execute('''drop view v_articles_authors_log, v_errors''')
+db.commit()
+db.close()
+
 def most_popular_three_articles():
     try:
         db = psycopg2.connect("dbname=news")
@@ -23,10 +29,8 @@ def most_popular_three_articles():
 
         print("\n")
 
-    except:
-        print('\033[91m\033[1m' +
-                'Unable to execute "most_popular_three_articles" request!' +
-                '\033[0m')
+    except psycopg2.DatabaseError as error:
+        print('\033[91m\033[1m{}\033[0m'.format(error))
     finally:
         return
 
@@ -51,10 +55,8 @@ def most_popular_article_author():
 
         print("\n")
 
-    except:
-        print('\033[91m\033[1m' +
-                'Unable to execute \'most_popular_article_author\' request!' +
-                 '\033[0m')
+    except psycopg2.DatabaseError as error:
+        print('\033[91m\033[1m{}\033[0m'.format(error))
     finally:
         return
 
@@ -87,10 +89,8 @@ def days_error():
             print(u"\u2022 {} \u2014 {}% errors".format(date_format, item[1]),)
         print("\033[92mRequests have been processed.\033[0m")
 
-    except:
-        print('\033[91m\033[1m' +
-                'Unable to execute \'days_errors\' request!' +
-                '\033[0m')
+    except psycopg2.DatabaseError as error:
+        print('\033[91m\033[1m{}\033[0m'.format(error))
     finally:
         return
 

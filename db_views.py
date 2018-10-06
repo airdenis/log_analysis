@@ -16,10 +16,9 @@ def create_articles_authors_log_view():
         print('\033[92m\033[1m' + 
                 "'v_articles_authors_log' view successfully has been created." +
                 '\033[0m')
-    except:
-        print('\033[91m\033[1m' +
-                "Failed to create 'v_articles_authors_log' view." +
-                '\033[0m')
+
+    except psycopg2.DatabaseError as error:
+        print('\033[91m\033[1m{}\033[0m'.format(error))
     finally:
         return
 
@@ -38,10 +37,8 @@ def create_errors_view():
                 "'v_errors' view successfully has been created." +
                 '\033[0m')
 
-    except:
-        print('\033[91m\033[1m' +
-                "Failed to create 'v_errors' view." +
-                '\033[0m')
+    except psycopg2.DatabaseError as error:
+        print('\033[91m\033[1m{}\033[0m'.format(error))
     finally:
         return
 
