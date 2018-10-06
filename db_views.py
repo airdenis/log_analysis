@@ -1,3 +1,4 @@
+from text_format import TextFormat as TF
 import psycopg2
 
 
@@ -13,12 +14,12 @@ def create_articles_authors_log_view():
                               articles.author = authors.id;''')
         db.commit()
         db.close()
-        print('\033[92m\033[1m' + 
-                "'v_articles_authors_log' view successfully has been created." +
-                '\033[0m')
+        print("{}{}'v_articles_authors_log' created.{}".format(TF.OKGREEN,
+                                                               TF.BOLD,
+                                                               TF.END))
 
     except psycopg2.DatabaseError as error:
-        print('\033[91m\033[1m{}\033[0m'.format(error))
+        print(''.join([TF.FAIL, TF.BOLD, str(error), TF.END]))
     finally:
         return
 
@@ -33,12 +34,12 @@ def create_errors_view():
                         WHERE status != '200 OK';''')
         db.commit()
         db.close()
-        print('\033[92m\033[1m' +
-                "'v_errors' view successfully has been created." +
-                '\033[0m')
+        print("{}{}'v_errors' created.{}".format(TF.OKGREEN,
+                                                 TF.BOLD,
+                                                 TF.END))
 
     except psycopg2.DatabaseError as error:
-        print('\033[91m\033[1m{}\033[0m'.format(error))
+        print(''.join([TF.FAIL, TF.BOLD, str(error), TF.END]))
     finally:
         return
 
@@ -46,4 +47,3 @@ def create_errors_view():
 if __name__ == "__main__":
     create_articles_authors_log_view()
     create_errors_view()
-

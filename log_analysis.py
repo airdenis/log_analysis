@@ -1,12 +1,6 @@
-from time import strftime
 import psycopg2
+from text_format import TextFormat as TF
 
-
-db = psycopg2.connect("dbname=news")
-c = db.cursor()
-c.execute('''drop view v_articles_authors_log, v_errors''')
-db.commit()
-db.close()
 
 def most_popular_three_articles():
     try:
@@ -19,18 +13,17 @@ def most_popular_three_articles():
                         LIMIT 3;''')
         result = c.fetchall()
         db.close()
-    
-        print('\033[4m\033[1m\033[93m' + 
-                "The most popular three articles of all time are:" +
-                '\033[0m')
-
+        print('{}Most popular three articles:{}'.format(''.join([TF.OKBLUE,
+                                                                TF.UNDERLINE,
+                                                                TF.BOLD]),
+                                                        TF.END))
         for item in result:
-            print(u"\u2022 \"{}\" \u2014 {} views".format(*item))
-
-        print("\n")
-
+            print("{} \"{}\" {} {} views".format(TF.BULLET,
+                                                 item[0],
+                                                 TF.EMDASH,
+                                                 item[1]))
     except psycopg2.DatabaseError as error:
-        print('\033[91m\033[1m{}\033[0m'.format(error))
+        print(''.join([TF.FAIL, TF.BOLD, str(error), TF.END]))
     finally:
         return
 
@@ -45,21 +38,19 @@ def most_popular_article_author():
                         ORDER BY num DESC;''')
         result = c.fetchall()
         db.close()
-
-        print('\033[4m\033[1m\033[93m' +
-                "The most popular article authors of all time are:" +
-                '\033[0m')
-
+        print('\n{}Most popular article author:{}'.format(''.join([TF.OKBLUE,
+                                                                  TF.UNDERLINE,
+                                                                  TF.BOLD]),
+                                                          TF.END))
         for item in result:
-            print(u"\u2022 {} \u2014 {} views".format(*item))
-
-        print("\n")
-
+            print("{} {} {} {} views".format(TF.BULLET,
+                                             item[0],
+                                             TF.EMDASH,
+                                             item[1]))
     except psycopg2.DatabaseError as error:
-        print('\033[91m\033[1m{}\033[0m'.format(error))
+        print(''.join([TF.FAIL, TF.BOLD, str(error), TF.END]))
     finally:
         return
-
 
 
 def days_error():
@@ -67,30 +58,33 @@ def days_error():
         db = psycopg2.connect("dbname=news")
         c = db.cursor()
         c.execute('''
-                    SELECT date, 
+                    SELECT date,
                             ROUND(COUNT(*) * 100::numeric/
                             (SELECT COUNT(*) FROM v_errors), 2) AS num
                         FROM v_errors
                         GROUP BY date
-                        HAVING 
+                        HAVING
                             ROUND(COUNT(*) * 100::numeric/
                             (SELECT COUNT(*) FROM v_errors), 2) > 1
                         ORDER BY num DESC;''')
         result = c.fetchall()
         db.close()
-
-        print('\033[4m\033[1m\033[93m' +
-                "Days which more than 1% of error requests are:" +
-                '\033[0m')
-    
+        print('\n{}Days - more than 1% errors:{}'.format(''.join([TF.OKBLUE,
+                                                                  TF.UNDERLINE,
+                                                                  TF.BOLD]),
+                                                         TF.END))
         for item in result:
             date_format = item[0].strftime("%d %B, %Y")
+            print("{} {} {} {}% errors".format(TF.BULLET,
+                                               date_format,
+                                               TF.EMDASH,
+                                               item[1]))
 
-            print(u"\u2022 {} \u2014 {}% errors".format(date_format, item[1]),)
-        print("\033[92mRequests have been processed.\033[0m")
-
+        print("{}{}Requests have been processed.{}".format(TF.OKGREEN,
+                                                           TF.BOLD,
+                                                           TF.END))
     except psycopg2.DatabaseError as error:
-        print('\033[91m\033[1m{}\033[0m'.format(error))
+        print(''.join([TF.FAIL, TF.BOLD, str(error), TF.END]))
     finally:
         return
 
