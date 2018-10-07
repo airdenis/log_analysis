@@ -14,12 +14,22 @@ def create_articles_authors_log_view():
                               articles.author = authors.id;''')
         db.commit()
         db.close()
-        print("{}{}'v_articles_authors_log' created.{}".format(TF.OKGREEN,
-                                                               TF.BOLD,
-                                                               TF.END))
+
+        print(
+            "{}{}'v_articles_authors_log' created.{}".format(
+                TF.OKGREEN,
+                TF.BOLD,
+                TF.END
+            )
+        )
 
     except psycopg2.DatabaseError as error:
-        print(''.join([TF.FAIL, TF.BOLD, str(error), TF.END]))
+        print(
+            ''.join(
+                [TF.FAIL, TF.BOLD, str(error), TF.END]
+            )
+        )
+
     finally:
         return
 
@@ -34,12 +44,22 @@ def create_errors_view():
                         WHERE status != '200 OK';''')
         db.commit()
         db.close()
-        print("{}{}'v_errors' created.{}".format(TF.OKGREEN,
-                                                 TF.BOLD,
-                                                 TF.END))
+
+        print(
+            "{}{}'v_errors' created.{}".format(
+                TF.OKGREEN,
+                TF.BOLD,
+                TF.END
+            )
+        )
 
     except psycopg2.DatabaseError as error:
-        print(''.join([TF.FAIL, TF.BOLD, str(error), TF.END]))
+        print(
+            ''.join(
+                [TF.FAIL, TF.BOLD, str(error), TF.END]
+            )
+        )
+
     finally:
         return
 

@@ -9,15 +9,15 @@ loaded a web page. Using that information, this code answers
 questions about the site's user activity.
  The program runs from the command line. It does not take any input from the user.
 Instead, it connects to that database, uses SQL queries to analyze the log data,
-1and prints out the answers to some questions:
+ and prints out the answers to some questions:
 1. *What are the most popular three articles of all time?*
 2. *Who are the most popular article authors of all time?*
 3. *On which days did more than 1% of requests lead to errors?*
 
   ## Installation:
-This project runs on pyhon3 and postgresql on ubunt viraual env.(I highly 
-recomend to use vagrantand to run vagrant up using Vagrantfile from the project. 
-It will install all dependencies and will creat 'news' database for you. 
+This project runs on pyhon3 and postgresql on ubuntu viraual env.(I highly 
+recomend to use vagrant and to run vagrant up using Vagrantfile from the project. 
+It will install all dependencies and will create 'news' database for you. 
 If you have vagrant up and running you can ignore steps 4 and 5).
 
 1. **apt-get update**
@@ -27,7 +27,7 @@ If you have vagrant up and running you can ignore steps 4 and 5).
 5. create a database named news.
 6. download data from "https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip"
 7. **psql -d news -f newsdata.sql**
-8. run **python3 db_view.py** to create database views(
+8. run **python3 db_view.py** to create database views (
          * The first view is named v_articles_authors_log. It aggregates all three
                tables and returns article title column and authors column. 
          * The second view is named v_errors. It retuns date and HTTP status code excluding '200 OK' status).
