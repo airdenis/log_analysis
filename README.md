@@ -20,19 +20,18 @@ and prints out the answers to some questions:
  It will install all dependencies and will creat 'news' database for you. If you have vagrant
  up and running you can ignore steps 4 and 5)*.
 '''sh
-    1. ~~apt-get update~~
-    2. ~~apt-get install git-core~~
-    3. ~~git clone https://github.com/airdenis/log_analysis.git~~
-    4. ~~pip install -r requirements.txt~~
+    1. **apt-get update**
+    2. **apt-get install git-core**
+    3. **git clone https://github.com/airdenis/log_analysis.git**
+    4. **pip install -r requirements.txt**
     5. create a database named news.
     6. download data from "https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip"
-    6. ~~psql -d news -f newsdata.sql~~
-    7. run ~~python3 db_view.py~~ to create database views(
-                *The first view is named v_articles_authors_log. It aggregates all three 
+    6. **psql -d news -f newsdata.sql**
+    7. run **python3 db_view.py** to create database views(
+                * The first view is named v_articles_authors_log. It aggregates all three 
             tables and returns article title column and authors column.
-                *The second view is named v_errors. It retuns date and HTTP status code 
-                excluding '200 OK' status).
-    8. run ~~python3 log_analysis.py~~ to get the results.
+                * The second view is named v_errors. It retuns date and HTTP status code excluding '200 OK' status).
+    8. run **python3 log_analysis.py** to get the results.
 '''
 
     
