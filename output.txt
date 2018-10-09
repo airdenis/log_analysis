@@ -10,35 +10,5 @@ Most popular article author:
 • Markoff Chaney — 84557 views
 
 Days - more than 1% errors:
-• 17 July, 2016 — 9.80% errors
-• 19 July, 2016 — 3.35% errors
-• 24 July, 2016 — 3.34% errors
-• 05 July, 2016 — 3.28% errors
-• 06 July, 2016 — 3.25% errors
-• 21 July, 2016 — 3.24% errors
-• 08 July, 2016 — 3.24% errors
-• 09 July, 2016 — 3.18% errors
-• 15 July, 2016 — 3.16% errors
-• 22 July, 2016 — 3.15% errors
-• 11 July, 2016 — 3.12% errors
-• 03 July, 2016 — 3.11% errors
-• 30 July, 2016 — 3.08% errors
-• 26 July, 2016 — 3.07% errors
-• 28 July, 2016 — 3.04% errors
-• 25 July, 2016 — 3.03% errors
-• 02 July, 2016 — 3.01% errors
-• 20 July, 2016 — 2.97% errors
-• 14 July, 2016 — 2.97% errors
-• 13 July, 2016 — 2.97% errors
-• 29 July, 2016 — 2.96% errors
-• 04 July, 2016 — 2.94% errors
-• 18 July, 2016 — 2.90% errors
-• 16 July, 2016 — 2.90% errors
-• 12 July, 2016 — 2.89% errors
-• 23 July, 2016 — 2.89% errors
-• 10 July, 2016 — 2.87% errors
-• 27 July, 2016 — 2.84% errors
-• 07 July, 2016 — 2.79% errors
-• 31 July, 2016 — 2.55% errors
-• 01 July, 2016 — 2.12% errors
+• 17 July, 2016 — 2.26% errors
 

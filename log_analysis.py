@@ -90,15 +90,13 @@ def days_error():
         db = psycopg2.connect("dbname=news")
         c = db.cursor()
         c.execute('''
-                    SELECT date,
-                            ROUND(COUNT(*) * 100::numeric/
-                            (SELECT COUNT(*) FROM v_errors), 2) AS num
-                        FROM v_errors
-                        GROUP BY date
-                        HAVING
-                            ROUND(COUNT(*) * 100::numeric/
-                            (SELECT COUNT(*) FROM v_errors), 2) > 1
-                        ORDER BY num DESC;''')
+                SELECT v_errors.date,
+                  ROUND(
+                    (v_errors.errors_count/v_total.total_count::NUMERIC) * 100,
+                        2)
+                FROM v_errors, v_total
+                WHERE v_errors.date = v_total.date and
+                  v_errors.errors_count/v_total.total_count::NUMERIC>0.01;''')
         results = c.fetchall()
         db.close()
 
