@@ -18,7 +18,8 @@ Instead, it connects to that database, uses SQL queries to analyze the log data,
 This project runs on pyhon3 and postgresql on ubuntu viraual env.(I highly 
 recomend to use vagrant and to run vagrant up using Vagrantfile from the project. 
 It will install all dependencies and will create 'news' database for you. 
-If you have vagrant up and running you can ignore steps 4 and 5).
+If you have vagrant up and running you can ignore steps 4 and 5. To have success installing
+VM on your coumputer visit: 1. *www.virtualbox.org* 2. *www.vagrantup.com*.)
 
 1. **apt-get update**
 2. **apt-get install git-core**
@@ -30,5 +31,6 @@ If you have vagrant up and running you can ignore steps 4 and 5).
 8. run **python3 db_view.py** to create database views (
          * The first view is named v_articles_authors_log. It aggregates all three
                tables and returns article title column and authors column. 
-         * The second view is named v_errors. It retuns date and HTTP status code excluding '200 OK' status).
+         * The second view is named v_errors. It retuns requests group by dates excluding  HTTP status code '200 OK').
+         * The third view is name v_total. It returns total requests group by dates.
  9. run **python3 log_analysis.py** to get the results.
