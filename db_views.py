@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from text_format import TextFormat as TF
 import psycopg2
 
